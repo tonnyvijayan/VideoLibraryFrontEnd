@@ -1,0 +1,8 @@
+.listing-div {
+  background-color: red;
+  display: inline-block;
+  position: fixed;
+  left: 200px;
+  width: 100vw;
+  height: 100vh;
+}
