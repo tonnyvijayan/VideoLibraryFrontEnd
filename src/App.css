@@ -1,6 +1,11 @@
-#root {
-  max-width: 100%;
-  margin: 0 auto;
+.main-page {
+  /* max-width: 100%; */
+
+  /* margin: 0; */
   /* padding: 2rem; */
   text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  /* gap: 20px; */
+  background-color: #d8eeff;
 }

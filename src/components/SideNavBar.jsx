@@ -3,15 +3,15 @@ import "./SideNavBar.css";
 import { Link } from "react-router-dom";
 
 export const SideNavBar = () => {
-  const menuValue = true;
+  // const menuValue = false;
   return (
     <nav
       //   className="finview-nav-site"
       className="nav-site"
-      style={menuValue ? { display: "flex" } : { display: "" }}
+      // style={menuValue ? { display: "flex" } : { display: "" }}
     >
       <div className="finview-nav-site-list">
-        <span>Categories</span>
+        <h2>Categories</h2>
         <Link to="/">Home</Link>
 
         <Link to="/investing">Investing</Link>
@@ -20,7 +20,7 @@ export const SideNavBar = () => {
         <Link to="/economy">Economy</Link>
       </div>
       <div className="finview-nav-site-list">
-        <span>Account</span>
+        <h2>Account</h2>
         <Link to="/playlist">PlayList</Link>
         <Link to="/history">History</Link>
         <Link to="/watchlater">Watch Later</Link>
