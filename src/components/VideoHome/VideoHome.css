@@ -1,0 +1,10 @@
+.video-section {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  /* grid-template-rows: repeat(auto-fill); */
+
+  gap: 2rem;
+
+  /* overflow-y: scroll; */
+}

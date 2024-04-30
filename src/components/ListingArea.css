@@ -1,9 +1,9 @@
 .listing-div {
-  background-color: red;
-  display: inline-block;
+  grid-column: 2/4;
+}
 
-  position: fixed;
-  left: 200px;
-  width: 100vw;
-  height: 100vh;
+@media screen and (max-width: 768px) {
+  .listing-div {
+    grid-column: 1/4;
+  }
 }

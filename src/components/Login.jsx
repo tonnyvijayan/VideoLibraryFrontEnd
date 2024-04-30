@@ -9,7 +9,7 @@ export const Login = () => {
   };
   const loginButtonHandler = () => {
     console.log("clicked");
-    setLogin(true);
+    setLogin(false);
     console.log(login);
   };
   return (

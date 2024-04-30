@@ -3,9 +3,11 @@
 
   /* margin: 0; */
   /* padding: 2rem; */
-  text-align: center;
+  /* text-align: center; */
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  /* grid-template-columns: 1fr 2fr 2fr; */
+  grid-template-columns: 200px auto;
+
   /* gap: 20px; */
   background-color: #d8eeff;
 }

@@ -13,7 +13,6 @@ export const SideNavBar = () => {
       <div className="finview-nav-site-list">
         <h2>Categories</h2>
         <Link to="/">Home</Link>
-
         <Link to="/investing">Investing</Link>
         <Link to="/trading">Trading</Link>
         <Link to="/options">Options</Link>
