@@ -1,6 +1,43 @@
 import "./SignUp.css";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
+  const navigate = useNavigate();
+  const [userData, setuserData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const inputFieldHandler = (event) => {
+    setuserData({ ...userData, [event.target.name]: event.target.value });
+  };
+
+  const formSubmitHandler = async () => {
+    const { username, email, password } = userData;
+    try {
+      if (username && email && password) {
+        const newUser = await axios.post(
+          "http://localhost:3077/user/createuser",
+          {
+            name: username,
+            email: email,
+            password: password,
+          },
+          { withCredentials: true }
+        );
+        console.log({ newUser });
+        navigate("/");
+      } else {
+        console.log("enter all required fields");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="signup-form-container">
       <div className="register-form">
@@ -47,29 +84,31 @@ export const SignUp = () => {
             type="text"
             placeholder="Username"
             name="username"
+            onChange={inputFieldHandler}
           />
           <input
             className="register-detail-input"
             type="email"
             placeholder="Email"
             name="email"
+            onChange={inputFieldHandler}
           />
           <input
             className="register-detail-input"
             type="password"
             placeholder="Password"
             name="password"
-          />
-          <input
-            className="register-detail-input"
-            type="password"
-            placeholder="Confirm Password"
-            name="confirm-password"
+            onChange={inputFieldHandler}
           />
         </div>
 
         <div className="register-input-container">
-          <button type="submit" value="Register" className="register-button">
+          <button
+            type="submit"
+            value="Register"
+            className="register-button"
+            onClick={formSubmitHandler}
+          >
             Submit
           </button>
         </div>

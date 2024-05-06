@@ -1,6 +1,6 @@
 import "../VideoHome/VideoHome.css";
 
-import { useVideoManagement } from "../../contexts/useVideoManagement";
+import { useVideoManagement } from "../../hooks/useVideoManagement";
 
 import { VideoCard } from "../VideoCard/VideoCard";
 

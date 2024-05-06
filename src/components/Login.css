@@ -81,3 +81,10 @@
   border-bottom: solid 1px #aaa;
   outline: none;
 }
+
+.persist-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

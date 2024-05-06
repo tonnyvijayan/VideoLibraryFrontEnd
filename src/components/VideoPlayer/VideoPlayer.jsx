@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import ReactPlayer from "react-player";
 // import axios from "axios";
-import { useVideoManagement } from "../../contexts/useVideoManagement";
+import { useVideoManagement } from "../../hooks/useVideoManagement";
 
 // import PlayListadd from "./Assets/playlist_add.svg";
 import PlayListCheck from "./Assets/playlist_check.svg";

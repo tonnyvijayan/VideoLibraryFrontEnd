@@ -1,5 +1,6 @@
 import { useReducer, createContext, useEffect } from "react";
-import axios from "axios";
+import axios from "../axios/axios";
+
 export const VideoContext = createContext();
 
 const initialState = {
@@ -19,19 +20,30 @@ const reducer = (state, action) => {
 export const VideoContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const fetchAllVideos = async () => {
-    try {
-      const { data } = await axios.get("http://localhost:3077/videos/");
-
-      const videoNew = data.data;
-      dispatch({ payload: videoNew, type: "Fetch-Videos-From-Server" });
-    } catch (error) {
-      console.log("Failed to fetch Videos", error.message);
-    }
-  };
-
   useEffect(() => {
+    let isMounted = true;
+    let controller = new AbortController();
+    const fetchAllVideos = async () => {
+      try {
+        const { data } = await axios.get("/videos", {
+          signal: controller.signal,
+        });
+
+        const videoNew = data.data;
+        isMounted &&
+          dispatch({ payload: videoNew, type: "Fetch-Videos-From-Server" });
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          console.log("Failed to fetch Videos", error.message);
+        }
+      }
+    };
     fetchAllVideos();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
   }, []);
   return (
     <VideoContext.Provider value={{ state, dispatch }}>
