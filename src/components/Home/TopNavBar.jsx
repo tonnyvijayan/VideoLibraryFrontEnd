@@ -5,10 +5,12 @@ import menu from "./assets/menu.svg";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import axios from "../../axios/axios";
+// import { useVideoManagement } from "../../hooks/useVideoManagement";
 
 export const TopNavBar = () => {
   const navigate = useNavigate();
   const { authState, setAuthState } = useAuth();
+  // const { state } = useVideoManagement();
 
   const logOutHandler = async () => {
     try {
@@ -31,7 +33,9 @@ export const TopNavBar = () => {
           <strong style={{ color: " #1e40af" }}>FinView</strong>
         </Link>
       </div>
-      <div>{JSON.stringify(authState)}</div>
+      {/* <div>{JSON.stringify(authState)}</div> */}
+
+      {/* <div>{JSON.stringify(state.watchLater)}</div> */}
       <div className="finview-navigation-container">
         {authState ? (
           <button

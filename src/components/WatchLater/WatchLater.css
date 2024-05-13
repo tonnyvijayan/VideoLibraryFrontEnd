@@ -1,0 +1,13 @@
+.video-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+h1 {
+  text-align: center;
+  background-color: #fff;
+  z-index: 1;
+  width: 100%;
+  position: fixed;
+}

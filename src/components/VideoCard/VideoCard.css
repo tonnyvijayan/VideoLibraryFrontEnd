@@ -1,15 +1,12 @@
 .video-container {
-  justify-self: center;
+  /* justify-self: center; */
   margin: 2rem auto;
-
   border: solid 1px #aaa;
   box-shadow: 2px 2px 5px #aaa;
   border-radius: 0.3rem;
   display: flex;
   flex-direction: column;
-  /* max-width: 400px; */
   width: 385px;
-
   background-color: #ffff;
 }
 .thumbnail {
@@ -31,8 +28,7 @@
 }
 .thumbnail-image {
   width: 100%;
-
-  max-height: 200px;
+  height: 200px;
 }
 
 .video-bottom-section {
@@ -47,7 +43,7 @@
   width: 36px;
   height: 36px;
   margin-right: 0.8rem;
-  /* background-color: brown; */
+
   background-color: blue;
 }
 .video-details {

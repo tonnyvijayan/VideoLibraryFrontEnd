@@ -8,7 +8,7 @@
   align-content: center;
   justify-content: space-between;
   background-color: #f5f5ff;
-  z-index: 100;
+  z-index: 20;
 }
 .finview-navigation-container {
   margin: 0px 2rem;

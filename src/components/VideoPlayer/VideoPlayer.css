@@ -70,22 +70,19 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
-  /* background-color: red; */
-
   opacity: 0;
   pointer-events: none;
-  /* pointer-events: auto; */
-
   position: fixed;
   top: 0px;
   left: 0px;
   width: 100vw;
   height: 100%;
-  z-index: 200;
+  z-index: 100;
 }
 .modal-container.show {
   pointer-events: auto;
   opacity: 1;
+  transition: 0.5s;
 }
 .modal {
   text-align: center;
@@ -102,12 +99,27 @@
 .modal p {
   opacity: 0.6;
 }
-.create-playList-input {
-  margin: 0 0.5rem;
+
+.modal-close-button {
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+}
+
+.create-playlist-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-playlist-input {
+  margin: 0.5rem 0.5rem;
   text-align: left;
-  /* padding: 1rem; */
+  padding: 0.6rem;
   width: 10rem;
-  height: 2rem;
+  height: 1.8rem;
+  border: 2px solid darkblue;
+  border-radius: 4px;
+  font-size: medium;
 }
 
 .create-playList-button {
@@ -116,33 +128,32 @@
   cursor: pointer;
 }
 
-.chekbox-container {
+.checkbox {
+  width: 2rem;
+}
+.chekbox-label {
+  margin: 0.6rem;
+  font-size: larger;
+}
+
+.delete-button-svg {
+  width: 1.2rem;
+  cursor: pointer;
+}
+
+.add-to-playlist-svg {
+  width: 2rem;
+  cursor: pointer;
+}
+
+.playlist-detail-container {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.img-button {
   border: none;
-}
-.chekbox-container input {
-  margin: 0.3rem;
-}
 
-.chekbox-container label {
-  margin: 0.3rem;
-}
-
-.playlist-remove-button {
-  padding: 0rem 0.5rem;
-
-  color: var(--darkblue);
-  font-weight: bold;
-  border: 1px solid var(--darkblue);
-  border-radius: 10px;
-  cursor: pointer;
-}
-.playlist-close-button {
-  margin-top: 10px;
-  background-color: var(--darkblue);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  /* border */
+  background: none;
 }
