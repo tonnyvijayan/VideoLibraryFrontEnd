@@ -1,0 +1,30 @@
+.toastDiv {
+  padding: 1rem 2rem;
+  display: none;
+  height: 50px;
+  justify-content: center;
+  align-content: center;
+  border-radius: 5px;
+  text-align: center;
+
+  width: fit-content;
+  position: fixed;
+  bottom: 2%;
+  right: 2%;
+  z-index: 200;
+  transition: ease-in 2s;
+}
+
+.success {
+  background-color: #a7f3d0;
+  color: #047857;
+  border: 2px solid #047857;
+}
+.fail {
+  background-color: #fecaca;
+  color: #b91c1c;
+  border: 2px solid #b91c1c;
+}
+.show-toast {
+  display: block;
+}
