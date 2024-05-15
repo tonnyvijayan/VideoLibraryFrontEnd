@@ -1,15 +1,13 @@
+import { useVideoManagement } from "../../hooks/useVideoManagement";
 import "./SideNavBar.css";
 
 import { Link } from "react-router-dom";
 
 export const SideNavBar = () => {
-  // const menuValue = false;
+  const { isOpen } = useVideoManagement();
   return (
-    <nav
-      //   className="finview-nav-site"
-      className="nav-site"
-      // style={menuValue ? { display: "flex" } : { display: "" }}
-    >
+    <nav className={`nav-site ${isOpen ? "show-menu" : ""}`}>
+      {/* // <nav className={`${isOpen ? "show-menu" : ""}`}> */}
       <div className="finview-nav-site-list">
         <h2>Categories</h2>
         <Link to="/">Home</Link>

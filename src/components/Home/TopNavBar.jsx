@@ -4,24 +4,33 @@ import stock from "./assets/stock.svg";
 import menu from "./assets/menu.svg";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import axios from "../../axios/axios";
-// import { useVideoManagement } from "../../hooks/useVideoManagement";
+import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
+import closeSvg from "./assets/close-button.svg";
+
+import { useVideoManagement } from "../../hooks/useVideoManagement";
+import { useToast } from "../../hooks/useToast";
 
 export const TopNavBar = () => {
+  const showToast = useToast();
+  const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const { authState, setAuthState } = useAuth();
-  // const { state } = useVideoManagement();
+  const { isOpen, setIsOpen } = useVideoManagement();
 
   const logOutHandler = async () => {
     try {
-      await axios.get("/user/logout", {
-        withCredentials: true,
-      });
+      await axiosPrivate.get("/user/logout");
       setAuthState("");
       navigate("/");
+      showToast("Logged Out", "success");
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const showMenuHandler = () => {
+    console.log(isOpen);
+    setIsOpen((setIsOpen) => !setIsOpen);
   };
 
   return (
@@ -33,7 +42,7 @@ export const TopNavBar = () => {
           <strong style={{ color: " #1e40af" }}>FinView</strong>
         </Link>
       </div>
-      {/* <div>{JSON.stringify(authState)}</div> */}
+      <div>{JSON.stringify(authState)}</div>
 
       {/* <div>{JSON.stringify(state.watchLater)}</div> */}
       <div className="finview-navigation-container">
@@ -61,8 +70,8 @@ export const TopNavBar = () => {
           </div>
         )}
 
-        <button className="menu-button">
-          <img src={menu} />
+        <button className="menu-button" onClick={showMenuHandler}>
+          <img src={isOpen ? closeSvg : menu} />
         </button>
       </div>
     </nav>

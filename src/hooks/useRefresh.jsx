@@ -1,34 +1,15 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "../axios/axios";
 import { useAuth } from "./useAuth";
-
-// export const useRefresh = () => {
-//   const { setAuthState } = useAuth();
-//   const refresh = async () => {
-//     const response = await axios.get("/user/refresh", {
-//       withCredentials: true,
-//     });
-//     const newAccessToken = response.data.accessToken;
-
-//     setAuthState(() => {
-//       return newAccessToken;
-//     });
-//     return newAccessToken;
-//   };
-
-//   return refresh;
-// };
+import { useCallback } from "react";
+import { axiosPrivate } from "../axios/axios";
 
 export const useRefresh = () => {
   const location = useLocation();
   const { setAuthState } = useAuth();
   const navigate = useNavigate();
-
-  const refresh = async () => {
+  const refresh = useCallback(async () => {
     try {
-      const response = await axios.get("/user/refresh", {
-        withCredentials: true,
-      });
+      const response = await axiosPrivate.get("/user/refresh");
       const newAccessToken = response.data.accessToken;
 
       setAuthState(() => {
@@ -46,7 +27,7 @@ export const useRefresh = () => {
       });
       console.error(error.response.data);
     }
-  };
+  }, []);
 
   return refresh;
 };

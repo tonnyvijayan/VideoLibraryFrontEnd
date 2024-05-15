@@ -1,16 +1,18 @@
 import "./SignUp.css";
-import axios from "axios";
+import axios from "../axios/axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "../hooks/useToast";
 
 export const SignUp = () => {
+  const showToast = useToast();
   const navigate = useNavigate();
   const [userData, setuserData] = useState({
     username: "",
     email: "",
     password: "",
   });
-
+  //
   const inputFieldHandler = (event) => {
     setuserData({ ...userData, [event.target.name]: event.target.value });
   };
@@ -25,16 +27,19 @@ export const SignUp = () => {
             name: username,
             email: email,
             password: password,
-          },
-          { withCredentials: true }
+          }
         );
-        console.log({ newUser });
-        navigate("/");
+        if (newUser.status === 201) {
+          navigate("/");
+          showToast("Account created", "success");
+        }
       } else {
+        showToast("All fields are required", "fail");
         console.log("enter all required fields");
       }
     } catch (error) {
       console.log(error);
+      showToast(error.response.data.message, "fail");
     }
   };
 

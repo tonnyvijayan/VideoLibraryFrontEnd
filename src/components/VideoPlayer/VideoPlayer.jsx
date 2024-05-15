@@ -2,7 +2,7 @@ import "./VideoPlayer.css";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { useVideoManagement } from "../../hooks/useVideoManagement";
-import axios from "../../axios/axios";
+// import axios from "../../axios/axios";
 // import PlayListadd from "./Assets/playlist_add.svg";
 import PlayListCheck from "./Assets/playlist_check.svg";
 import WatchLaterAdd from "./Assets/watch_later_not.svg";
@@ -16,10 +16,10 @@ import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 
 export const VideoPlayer = () => {
   const axiosPrivate = useAxiosPrivate();
-
   const { authState } = useAuth();
   const showToast = useToast();
   const [playlistModal, setPlaylistModal] = useState("");
+  const [watchLaterModal, setWatchLaterModal] = useState("");
   const { videoId } = useParams();
   const { state, dispatch } = useVideoManagement();
   const [playlistName, setPlaylistName] = useState("");
@@ -131,10 +131,9 @@ export const VideoPlayer = () => {
     }
   };
 
-  //
   const removeFromWatchLaterHandler = async () => {
     try {
-      const response = await axios.post("/user/removefromwatchlater", {
+      const response = await axiosPrivate.post("/user/removefromwatchlater", {
         videoId: videoId,
       });
       if (response.status === 200) {
@@ -150,13 +149,13 @@ export const VideoPlayer = () => {
       }
     } catch (error) {
       console.log(error);
-      showToast("unable to remove video from watchlater");
+      showToast("unable to remove video from watchlater", "fail");
     }
   };
 
   const addToWatchLaterHandler = async () => {
     try {
-      const response = await axios.post("/user/addtowatchlater", {
+      const response = await axiosPrivate.post("/user/addtowatchlater", {
         videoId: videoId,
       });
       if (response.status === 201) {
@@ -213,8 +212,17 @@ export const VideoPlayer = () => {
                 >
                   <img src={PlayListCheck} alt="Playlist" />
                 </span>
-
-                {videoInWatchLater.includes(videoId) ? (
+                {!authState ? (
+                  <span className="icon-links">
+                    <img
+                      src={WatchLaterAdd}
+                      alt="watchlater"
+                      onClick={() => {
+                        setWatchLaterModal("show-watchlater-modal");
+                      }}
+                    />
+                  </span>
+                ) : videoInWatchLater.includes(videoId) ? (
                   <span className="icon-links">
                     <img
                       src={WatchLaterRemove}
@@ -231,6 +239,25 @@ export const VideoPlayer = () => {
                     />
                   </span>
                 )}
+                <div
+                  className={`modal-container ${watchLaterModal}`}
+                  id="modal-container"
+                >
+                  <div className="modal">
+                    <h2>WatchLater</h2>
+                    <strong>Log in to add to WatchLater</strong>
+                    <br />
+                    <button
+                      className="modal-close-button"
+                      id="close-modal"
+                      onClick={() => {
+                        setWatchLaterModal("");
+                      }}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -323,69 +350,6 @@ export const VideoPlayer = () => {
           </div>
         </div>
       )}
-
-      {/* <div className={`modal-container ${playlistModal}`} id="modal-container">
-        <div className="modal">
-          <h2>Playlist</h2>
-          {state?.playLists.map((item) => {
-            const videoInPlaylist = item.videos.map((video) => video._id);
-
-            return (
-              <div
-                className="playlist-detail-container"
-                key={item.playListName}
-              >
-                <input
-                  type="checkbox"
-                  id={item.playListName}
-                  className="checkbox"
-                  checked={videoInPlaylist.includes(videoId) ? true : false}
-                  onChange={checkBoxHandler}
-                />
-                <label htmlFor={item.playListName} className="chekbox-label">
-                  {item.playListName}
-                </label>
-                <span className="">
-                  <img
-                    src={DeleteButton}
-                    alt="Delete-button"
-                    className="delete-button-svg"
-                    onClick={deletePlaylistHandler}
-                    name={item.playListName}
-                  />
-                </span>
-              </div>
-            );
-          })}
-
-          <div className="create-playlist-container">
-            <input
-              type="text"
-              className="create-playlist-input"
-              placeholder="Create New Playlist"
-              onChange={playlistInputHandler}
-              value={playlistName}
-            />
-            <button className="img-button" onClick={createPlaylistHandler}>
-              <img
-                src={Add}
-                alt="add-to-playlist"
-                className="add-to-playlist-svg"
-              />
-            </button>
-          </div>
-
-          <button
-            className="modal-close-button"
-            id="close-modal"
-            onClick={() => {
-              setPlaylistModal("");
-            }}
-          >
-            Close
-          </button>
-        </div>
-      </div> */}
     </div>
   );
 };

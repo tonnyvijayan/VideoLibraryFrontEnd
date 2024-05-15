@@ -12,17 +12,25 @@ export const useAxiosPrivate = () => {
     console.log("interceptors fired");
     const requestInterceptor = axiosPrivate.interceptors.request.use(
       (config) => {
+        console.log("from config");
         if (!config.headers["Authorization"]) {
+          console.log("from config auth missin");
+
           config.headers["Authorization"] = `Bearer ${authState}`;
+          console.log("old token", authState);
         }
         return config;
       },
-      (error) => Promise.reject(error)
+      (error) => {
+        console.log("from request error", error);
+        return Promise.reject(error);
+      }
     );
 
     const responseInterceptor = axiosPrivate.interceptors.response.use(
       (response) => response,
       async (error) => {
+        console.log("response error", error);
         const previousRequest = error?.config;
         console.log("before setting header", previousRequest);
         if (error?.response?.status === 403 && !previousRequest?.sent) {

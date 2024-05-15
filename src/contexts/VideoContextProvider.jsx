@@ -37,11 +37,12 @@ const reducer = (state, action) => {
   }
 };
 
-///
 export const VideoContextProvider = ({ children }) => {
   const axiosPrivate = useAxiosPrivate();
   const { authState } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+
   const [toastDetails, setToastDetails] = useState({
     toastMessage: "",
     active: false,
@@ -69,32 +70,6 @@ export const VideoContextProvider = ({ children }) => {
       }
     };
     fetchAllVideos();
-    // const fetchUserPlayList = async () => {
-    //   try {
-    //     const userPlayList = await axiosPrivate.get("/user/fetchplaylists");
-    //     dispatch({
-    //       payload: userPlayList.data.playLists,
-    //       type: "Set-User-Playlist-From-Server",
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-    // const fetchUserWatchLater = async () => {
-    //   try {
-    //     const response = await axiosPrivate.get("/user/fetchwatchlater");
-    //     dispatch({
-    //       type: "Set-User-WatchLater-From-Server",
-    //       payload: response.data.watchLaterVideos,
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-    // if (authState) {
-    //   fetchUserPlayList();
-    //   fetchUserWatchLater();
-    // }
     return () => {
       isMounted = false;
 
@@ -140,6 +115,8 @@ export const VideoContextProvider = ({ children }) => {
         setToastDetails,
         loading,
         setLoading,
+        isOpen,
+        setIsOpen,
       }}
     >
       {children}

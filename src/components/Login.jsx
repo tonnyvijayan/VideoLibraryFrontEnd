@@ -1,11 +1,15 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "../axios/axios";
+// import axios from "../axios/axios";
+import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useToast } from "../hooks/useToast";
 
 export const Login = () => {
+  const axiosPrivate = useAxiosPrivate();
+  const showToast = useToast();
   const navigate = useNavigate();
   const [userCredential, setUserCredential] = useState({});
   const { authState, setAuthState, persist, setPersist } = useAuth();
@@ -14,11 +18,9 @@ export const Login = () => {
 
   const logoutButtonHandler = async () => {
     try {
-      await axios.get("/user/logout", {
-        withCredentials: true,
-      });
-
+      await axiosPrivate.get("/user/logout");
       setAuthState("");
+      showToast("Logged Out", "success");
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -33,20 +35,17 @@ export const Login = () => {
   };
   const loginButtonHandler = async () => {
     try {
-      const { data } = await axios.post(
-        "/user/authenticateuser",
-        {
-          name: userCredential.name,
-
-          password: userCredential.password,
-        },
-        { withCredentials: true }
-      );
-      setAuthState(data.accessToken);
-      console.log({ location });
-      navigate(previousLocation || "/", { replace: true });
+      const response = await axiosPrivate.post("/user/authenticateuser", {
+        name: userCredential.name,
+        password: userCredential.password,
+      });
+      if (response.status === 200) {
+        setAuthState(response.data.accessToken);
+        showToast("Logged In", "success");
+        navigate(previousLocation || "/", { replace: true });
+      }
     } catch (error) {
-      console.log(error.response.data);
+      showToast(error.response.data.message, "fail");
     }
   };
 
