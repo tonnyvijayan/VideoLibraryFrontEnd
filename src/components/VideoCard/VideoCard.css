@@ -63,3 +63,9 @@
 .video-view-data {
   color: #555;
 }
+
+@media screen and (max-width: 450px) {
+  .video-container {
+    width: 100%;
+  }
+}
