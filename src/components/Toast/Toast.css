@@ -3,10 +3,9 @@
   display: none;
   height: 50px;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   border-radius: 5px;
   text-align: center;
-
   width: fit-content;
   position: fixed;
   bottom: 2%;
@@ -26,5 +25,5 @@
   border: 2px solid #b91c1c;
 }
 .show-toast {
-  display: block;
+  display: flex;
 }

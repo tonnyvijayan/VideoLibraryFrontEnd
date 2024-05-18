@@ -12,7 +12,7 @@ export const SignUp = () => {
     email: "",
     password: "",
   });
-  //
+
   const inputFieldHandler = (event) => {
     setuserData({ ...userData, [event.target.name]: event.target.value });
   };
@@ -35,7 +35,6 @@ export const SignUp = () => {
         }
       } else {
         showToast("All fields are required", "fail");
-        console.log("enter all required fields");
       }
     } catch (error) {
       console.log(error);

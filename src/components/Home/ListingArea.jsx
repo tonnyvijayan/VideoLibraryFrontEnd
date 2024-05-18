@@ -9,16 +9,23 @@ import { PrivateRoute } from "../PrivateRoute";
 import { PersistLogin } from "../PersistLogin";
 import { Toast } from "../Toast/Toast";
 import { WatchLater } from "../WatchLater/WatchLater";
+import { Investing } from "../VideoHome/Investing";
+import { Trading } from "../VideoHome/Trading";
+import { Economy } from "../VideoHome/Economy";
 
 export const ListingArea = () => {
   return (
     <>
       <div className="listing-div">
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<VideoHome />} />
           <Route path="/videos/:videoId" element={<VideoPlayer />} />
+          <Route path="/investing" element={<Investing />} />
+          <Route path="/trading" element={<Trading />} />
+          <Route path="/economy" element={<Economy />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+
           <Route element={<PersistLogin />}>
             <Route element={<PrivateRoute />}>
               <Route path="/watchlater" element={<WatchLater />} />

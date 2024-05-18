@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:3077/";
+const BASE_URL = "https://finviewserver.onrender.com";
 
 export default axios.create({
   baseURL: BASE_URL,

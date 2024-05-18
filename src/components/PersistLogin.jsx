@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-
 import { useAuth } from "../hooks/useAuth";
 import { useRefresh } from "../hooks/useRefresh";
 import { useEffect, useState } from "react";

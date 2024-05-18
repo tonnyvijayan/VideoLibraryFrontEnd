@@ -1,11 +1,11 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import axios from "../axios/axios";
 import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useToast } from "../hooks/useToast";
+import { useLogOut } from "../hooks/useLogOut";
 
 export const Login = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -14,18 +14,8 @@ export const Login = () => {
   const [userCredential, setUserCredential] = useState({});
   const { authState, setAuthState, persist, setPersist } = useAuth();
   const location = useLocation();
+  const logOut = useLogOut();
   const previousLocation = location?.state?.location;
-
-  const logoutButtonHandler = async () => {
-    try {
-      await axiosPrivate.get("/user/logout");
-      setAuthState("");
-      showToast("Logged Out", "success");
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const inputChangeHandler = (event) => {
     setUserCredential({
@@ -79,7 +69,12 @@ export const Login = () => {
               />
 
               {authState ? (
-                <button onClick={logoutButtonHandler} className="btn">
+                <button
+                  onClick={() => {
+                    logOut();
+                  }}
+                  className="btn"
+                >
                   Logout
                 </button>
               ) : (

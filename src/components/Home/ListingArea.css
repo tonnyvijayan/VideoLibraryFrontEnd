@@ -6,10 +6,4 @@
   .listing-div {
     grid-column: 1/4;
   }
-
-  /* new */
-  .listing-div {
-    /* display: inline-block;
-    background-color: red; */
-  }
 }

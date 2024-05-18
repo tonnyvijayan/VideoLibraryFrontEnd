@@ -99,7 +99,7 @@ export const VideoContextProvider = ({ children }) => {
         console.log(error);
       }
     };
-    console.log("auth useEffect fired");
+
     if (authState) {
       fetchUserPlayList();
       fetchUserWatchLater();

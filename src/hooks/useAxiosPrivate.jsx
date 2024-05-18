@@ -9,7 +9,6 @@ export const useAxiosPrivate = () => {
   const refresh = useRefresh();
 
   useEffect(() => {
-    console.log("interceptors fired");
     const requestInterceptor = axiosPrivate.interceptors.request.use(
       (config) => {
         console.log("from config");

@@ -1,18 +1,16 @@
 import "./VideoPlayer.css";
-import { useParams } from "react-router-dom";
-import ReactPlayer from "react-player";
-import { useVideoManagement } from "../../hooks/useVideoManagement";
-// import axios from "../../axios/axios";
-// import PlayListadd from "./Assets/playlist_add.svg";
 import PlayListCheck from "./Assets/playlist_check.svg";
+import WatchLaterRemove from "./Assets/watch_later.svg";
 import WatchLaterAdd from "./Assets/watch_later_not.svg";
 import DeleteButton from "./Assets/delete4.svg";
 import Add from "./Assets/add.svg";
+import { useParams } from "react-router-dom";
+import { useVideoManagement } from "../../hooks/useVideoManagement";
 import { useEffect, useState } from "react";
 import { useToast } from "../../hooks/useToast";
-import WatchLaterRemove from "./Assets/watch_later.svg";
 import { useAuth } from "../../hooks/useAuth";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
+import ReactPlayer from "react-player";
 
 export const VideoPlayer = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -23,6 +21,7 @@ export const VideoPlayer = () => {
   const { videoId } = useParams();
   const { state, dispatch } = useVideoManagement();
   const [playlistName, setPlaylistName] = useState("");
+
   const selectedVideo = state.videos.filter((item) => {
     return item._id === videoId;
   });
@@ -83,7 +82,6 @@ export const VideoPlayer = () => {
           videoId: videoId,
         });
         if (response.status === 201) {
-          // const [videoToBeAdded] = selectedVideo;
           const addVideoToPlayList = state.playLists.map((item) => {
             return item.playListName === event.target.id
               ? { ...item, videos: [...item.videos, videoToBeAdded] }
@@ -137,7 +135,6 @@ export const VideoPlayer = () => {
         videoId: videoId,
       });
       if (response.status === 200) {
-        console.log(response);
         const updatedWatchLater = state.watchLater.filter(
           (item) => item._id !== videoId
         );

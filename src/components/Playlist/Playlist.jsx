@@ -1,7 +1,5 @@
 import "../Playlist/Playlist.css";
-
 import { useVideoManagement } from "../../hooks/useVideoManagement";
-
 import { VideoCard } from "../VideoCard/VideoCard";
 
 export const Playlist = () => {
