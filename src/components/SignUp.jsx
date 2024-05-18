@@ -21,14 +21,11 @@ export const SignUp = () => {
     const { username, email, password } = userData;
     try {
       if (username && email && password) {
-        const newUser = await axios.post(
-          "http://localhost:3077/user/createuser",
-          {
-            name: username,
-            email: email,
-            password: password,
-          }
-        );
+        const newUser = await axios.post("/user/createuser", {
+          name: username,
+          email: email,
+          password: password,
+        });
         if (newUser.status === 201) {
           navigate("/");
           showToast("Account created", "success");
