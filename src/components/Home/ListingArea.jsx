@@ -12,6 +12,7 @@ import { WatchLater } from "../WatchLater/WatchLater";
 import { Investing } from "../VideoHome/Investing";
 import { Trading } from "../VideoHome/Trading";
 import { Economy } from "../VideoHome/Economy";
+import { RouteNotFound } from "../RouteNotFound/RouteNotFound";
 
 export const ListingArea = () => {
   return (
@@ -32,6 +33,7 @@ export const ListingArea = () => {
               <Route path="/playlist" element={<Playlist />} />
             </Route>
           </Route>
+          <Route path="*" element={<RouteNotFound />} />
         </Routes>
       </div>
       <Toast />

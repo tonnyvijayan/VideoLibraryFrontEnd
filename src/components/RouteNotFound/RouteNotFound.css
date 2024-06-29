@@ -1,0 +1,15 @@
+.routenotfound-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #d8eeff;
+}
+
+.routenotfound-header-container {
+  font-weight: bold;
+  font-size: xx-large;
+  color: #27418a;
+}

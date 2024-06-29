@@ -4,6 +4,7 @@ import WatchLaterRemove from "./Assets/watch_later.svg";
 import WatchLaterAdd from "./Assets/watch_later_not.svg";
 import DeleteButton from "./Assets/delete4.svg";
 import Add from "./Assets/add.svg";
+import { RouteNotFound } from "../RouteNotFound/RouteNotFound";
 import { useParams } from "react-router-dom";
 import { useVideoManagement } from "../../hooks/useVideoManagement";
 import { useEffect, useState } from "react";
@@ -175,91 +176,95 @@ export const VideoPlayer = () => {
 
   return (
     <div className="video-page-video-section">
-      {selectedVideo?.map((item) => {
-        const { _id, videoUrl, title, creator, views } = item;
-        return (
-          <div key={_id} className="video-page-video-container">
-            <ReactPlayer url={videoUrl} controls={true} width="100%" />
+      {selectedVideo.length > 0 ? (
+        selectedVideo?.map((item) => {
+          const { _id, videoUrl, title, creator, views } = item;
+          return (
+            <div key={_id} className="video-page-video-container">
+              <ReactPlayer url={videoUrl} controls={true} width="100%" />
 
-            <div className="video-page-video-bottom-section">
-              <a href="#" className="video-page-channel-icon">
-                <img
-                  src={"dfdf"}
-                  alt=""
-                  className="video-page-channel-icon-image"
-                />
-              </a>
-              <div className="video-page-video-details">
-                <span className="video-page-video-title">{title}</span>
-                <span className="video-page-channel-name">{creator}</span>
-                <div className="video-page-video-view-data">
-                  <span className="video-page-views">
-                    {views}
-                    views
-                  </span>
-                  <span className="video-page-date-posted">3 days Ago</span>
+              <div className="video-page-video-bottom-section">
+                <a href="#" className="video-page-channel-icon">
+                  <img
+                    src={"dfdf"}
+                    alt=""
+                    className="video-page-channel-icon-image"
+                  />
+                </a>
+                <div className="video-page-video-details">
+                  <span className="video-page-video-title">{title}</span>
+                  <span className="video-page-channel-name">{creator}</span>
+                  <div className="video-page-video-view-data">
+                    <span className="video-page-views">
+                      {views}
+                      views
+                    </span>
+                    <span className="video-page-date-posted">3 days Ago</span>
+                  </div>
                 </div>
-              </div>
-              <div className="bottom-section-icons">
-                <span
-                  className="icon-links"
-                  onClick={() => {
-                    setPlaylistModal("show");
-                  }}
-                >
-                  <img src={PlayListCheck} alt="Playlist" />
-                </span>
-                {!authState ? (
-                  <span className="icon-links">
-                    <img
-                      src={WatchLaterAdd}
-                      alt="watchlater"
-                      onClick={() => {
-                        setWatchLaterModal("show-watchlater-modal");
-                      }}
-                    />
+                <div className="bottom-section-icons">
+                  <span
+                    className="icon-links"
+                    onClick={() => {
+                      setPlaylistModal("show");
+                    }}
+                  >
+                    <img src={PlayListCheck} alt="Playlist" />
                   </span>
-                ) : videoInWatchLater.includes(videoId) ? (
-                  <span className="icon-links">
-                    <img
-                      src={WatchLaterRemove}
-                      alt="watchlater"
-                      onClick={removeFromWatchLaterHandler}
-                    />
-                  </span>
-                ) : (
-                  <span className="icon-links">
-                    <img
-                      src={WatchLaterAdd}
-                      alt="watchlater"
-                      onClick={addToWatchLaterHandler}
-                    />
-                  </span>
-                )}
-                <div
-                  className={`modal-container ${watchLaterModal}`}
-                  id="modal-container"
-                >
-                  <div className="modal">
-                    <h2>WatchLater</h2>
-                    <strong>Log in to add to WatchLater</strong>
-                    <br />
-                    <button
-                      className="modal-close-button"
-                      id="close-modal"
-                      onClick={() => {
-                        setWatchLaterModal("");
-                      }}
-                    >
-                      Close
-                    </button>
+                  {!authState ? (
+                    <span className="icon-links">
+                      <img
+                        src={WatchLaterAdd}
+                        alt="watchlater"
+                        onClick={() => {
+                          setWatchLaterModal("show-watchlater-modal");
+                        }}
+                      />
+                    </span>
+                  ) : videoInWatchLater.includes(videoId) ? (
+                    <span className="icon-links">
+                      <img
+                        src={WatchLaterRemove}
+                        alt="watchlater"
+                        onClick={removeFromWatchLaterHandler}
+                      />
+                    </span>
+                  ) : (
+                    <span className="icon-links">
+                      <img
+                        src={WatchLaterAdd}
+                        alt="watchlater"
+                        onClick={addToWatchLaterHandler}
+                      />
+                    </span>
+                  )}
+                  <div
+                    className={`modal-container ${watchLaterModal}`}
+                    id="modal-container"
+                  >
+                    <div className="modal">
+                      <h2>WatchLater</h2>
+                      <strong>Log in to add to WatchLater</strong>
+                      <br />
+                      <button
+                        className="modal-close-button"
+                        id="close-modal"
+                        onClick={() => {
+                          setWatchLaterModal("");
+                        }}
+                      >
+                        Close
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })
+      ) : (
+        <RouteNotFound />
+      )}
       {authState ? (
         <div
           className={`modal-container ${playlistModal}`}
