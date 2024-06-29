@@ -1,4 +1,4 @@
-.routenotfound-container {
+.emptywatchlater-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,7 +8,7 @@
   background-color: #d8eeff;
 }
 
-.routenotfound-header-container {
+.emptywatchlater-header-container {
   font-weight: bold;
   font-size: xx-large;
   color: #27418a;

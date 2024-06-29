@@ -41,13 +41,13 @@ export const TopNavBar = () => {
               to="/login"
               className="navigation-buttons bg-cl-blue cl-white"
             >
-              SignIn
+              Sign In
             </Link>
             <Link
               to="/signup"
               className="navigation-buttons bg-cl-white cl-blue "
             >
-              SignUp
+              Sign Up
             </Link>
           </div>
         )}

@@ -1,6 +1,8 @@
-.video-section {
+.video-section-watchlater {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-rows: 1fr;
+
   gap: 2rem;
 }
 
@@ -10,4 +12,11 @@ h1 {
   z-index: 1;
   width: 100%;
   position: fixed;
+}
+
+@media screen and (max-width: 768px) {
+  .video-section-watchlater {
+    display: block;
+    min-height: 100vh;
+  }
 }
