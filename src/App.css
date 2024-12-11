@@ -1,6 +1,16 @@
-#root {
-  max-width: 100%;
-  margin: 0 auto;
-  /* padding: 2rem; */
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.main-page {
+  display: grid;
+  grid-template-columns: 200px auto;
+  background-color: #d8eeff;
+}
+
+@media screen and (max-width: 768px) {
+  .main-page {
+    display: block;
+  }
 }

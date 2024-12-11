@@ -1,13 +1,16 @@
-import { Login } from "./components/Login";
-
-import { Routes, Route } from "react-router-dom";
+import { TopNavBar } from "./components/Home/TopNavBar";
+import { SideNavBar } from "./components/Home/SideNavBar";
+import { ListingArea } from "./components/Home/ListingArea";
+import "./App.css";
 
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <div className="main-page">
+        <TopNavBar />
+        <SideNavBar />
+        <ListingArea />
+      </div>
     </>
   );
 }
